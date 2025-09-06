@@ -9,7 +9,7 @@ const handleResponseError = ( res, statusCode, msg, error) => {
     }
 
     res.status(statusCode).json({ ok:false, msg:msg, errors: 'Aqui van los errores de los campos'})
-}
+};
 
 module.exports = {
     handleResponseSucess,
