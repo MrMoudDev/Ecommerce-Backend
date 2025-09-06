@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend E-Commerce",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch ./src/index.js"
+  },
+  "keywords": [
+    "Vanilla",
+    "node.js",
+    "mongoose",
+    "express",
+    "js"
+  ],
+  "author": "Santiago Velasquez <santiago.velasquez08120@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
+  }
+}
