@@ -1,5 +1,5 @@
-const { handleResponseSucess, handleResponseError } = require("../helpers/handleResponse")
-const ProductModel = require("../models/product.model")
+const { handleResponseSucess, handleResponseError } = require("../helpers/handleResponse.js")
+const { ProductModel } = require("../models/product.model")
 const { dbpostProduct, dbputProductById, dbgetProduct, dbgetProductsById, dbpatchProductById, dbdeleteProductsById } = require("../services/products.service")
 
 async function getProducts (req, res) {
@@ -8,7 +8,7 @@ async function getProducts (req, res) {
         handleResponseSucess( res, 200, data)
     }
     catch ( error ) {
-        handleResponseError( res, 500, error, 'Error al obetener el producto')
+        handleResponseError( res, 500, 'Error al obetener el producto', error)
     }
 }
 
@@ -19,7 +19,7 @@ async function getProductsById ( req, res) {
         const data = await dbgetProductsById( productId )
 
         if ( !data ) {
-            handleResponseError( res, 404, 'Producto no encontrado')
+            return handleResponseError( res, 404, 'Producto no encontrado')
             // return res.status (400).json({ok: false, msg: 'Producto no encontrado'})
         }
             handleResponseSucess( res, 200, data)
@@ -37,17 +37,7 @@ async function postProduct (req, res) {
         handleResponseSucess( res, 201, data)
 
     } catch (error) {
-
-        const errors = {}
-
-        if ( error.name === 'ValidationError') {
-            for( let property in error.errors) {
-                // console.log('>>>', property)
-                errors[property] = error.errosrs[property].message
-            }
-        }
-        console.log(errors)
-            handleResponseError(res, 500, error, 'Erorr al registrar el producto')
+            handleResponseError(res, 500, 'Erorr al registrar el producto', error)
     }
 }
 
@@ -59,13 +49,13 @@ async function putProductById ( req, res) {
         const data = await dbputProductById(productId, inputData)
 
         if ( !data ) {
-            handleResponseError(res, 404, 'Producto no encontrado')
+            return handleResponseError(res, 404, 'Producto no encontrado')
             // return res.status(404).json({ok: false, msg: 'Producto no encontrado'})
         }
         handleResponseSucess( res, 200, data)
 
     } catch (error) {
-        handleResponseError(res, 500, error, 'Error al actualizar tus productos')
+        handleResponseError(res, 500, 'Error al actualizar tus productos', error)
     }
 }
 
@@ -94,22 +84,13 @@ async function patchProductById (req, res) {
 
         const data = await dbpatchProductById( productId, inputData)
         if ( !data ) {
-            handleResponseError(res, 404, 'Producto no encontrado')
+            return handleResponseError(res, 404, 'Producto no encontrado')
             // return res.status(404).json({ok: false, msg: 'Producto no encontrado'})
         }
         handleResponseSucess( res, 200, data)
 
     } catch (error) {
-
-        const errors = {}
-
-        if ( error.name === 'ValidationError') {
-            for( let property in error.errors) {
-                // console.log('>>>', property)
-                errors[property] = error.errosrs[property].message
-            }
-        }
-        handleResponseError(res, 500, error, 'Erorr al actualizar el producto')
+        handleResponseError(res, 500, 'Erorr al actualizar el producto', error)
     }
 
 }
