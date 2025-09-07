@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const dbConnection = require ('./config/mongo.config.js' )
-const port = 3000
+const port = process.env.PORT
 
 dbConnection()
 app.use(cors())

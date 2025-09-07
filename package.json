@@ -4,7 +4,7 @@
   "description": "Backend E-Commerce",
   "main": "index.js",
   "scripts": {
-    "dev": "node --watch ./src/index.js"
+    "dev": "node --env-file .env --watch ./src/index.js"
   },
   "keywords": [
     "Vanilla",
@@ -18,6 +18,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.0"
   }
 }
