@@ -10,6 +10,7 @@ app.use(express.json())
 
 app.use( '/api/categories', require('./routes/categories.routes.js'))
 app.use( '/api/products', require('./routes/product.routes.js'))
+app.use( '/api/auth', require('./routes/user.routes.js'))
 
 
 app.listen ( port,() => {

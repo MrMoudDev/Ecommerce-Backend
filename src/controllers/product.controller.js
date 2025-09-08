@@ -1,5 +1,5 @@
 const { handleResponseSucess, handleResponseError } = require("../helpers/handleResponse.js")
-const { ProductModel } = require("../models/product.model")
+const {ProductModel}  = require("../models/product.model")
 const { dbpostProduct, dbputProductById, dbgetProduct, dbgetProductsById, dbpatchProductById, dbdeleteProductsById } = require("../services/products.service")
 
 async function getProducts (req, res) {
