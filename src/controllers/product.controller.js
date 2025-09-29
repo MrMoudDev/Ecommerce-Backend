@@ -30,6 +30,9 @@ async function getProductsById ( req, res) {
 
 async function postProduct (req, res) {
     const inputData = req.body
+    const payload = req.authUser
+
+    inputData.userId = payload.id
 
     try {
         const data = await dbpostProduct( inputData )

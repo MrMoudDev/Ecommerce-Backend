@@ -10,13 +10,11 @@ const authUser = (req, res, next) => {
         return res.json({msg: "Error: al obtener el token"})
     }
 
-
-    const payload = verifyToken(token)
-
     try {
-        console.log({ payload })
 
-    console.log({ payload })
+        const payload = verifyToken(token)
+
+        console.log({ payload })
 
         //Eliminamos propiedades adicionales
         delete payload.iat;
@@ -27,7 +25,7 @@ const authUser = (req, res, next) => {
 
         next()
 
-    } 
+    }
     catch (error) {
         res.json({msg: "Error al autenticar el usuario"})
     }

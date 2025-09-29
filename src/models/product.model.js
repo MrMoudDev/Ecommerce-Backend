@@ -33,6 +33,10 @@ const ProductSchema = new mongoose.Schema ({
     status: {
         type: Boolean,
         default: true
+    },
+    userId: {
+        type: String,
+        required: [true, 'El usuario es requerido para registrar un producto']
     }
 },{
     timestamps: true,

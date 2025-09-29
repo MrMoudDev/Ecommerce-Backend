@@ -21,8 +21,8 @@ const login = async ( req, res ) => {
             console.log('mongo:', user)
 
             if (inputData.password === user.password) {
-                const token = generateToken(inputData)
-                return res.json({token, user})
+                const token = generateToken({id: user._id, email: user.email})
+                return res.json({token, user })
             } else {
                 res.json({msg: 'Contraseña incorrecta'})
             }
