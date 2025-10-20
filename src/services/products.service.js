@@ -4,6 +4,13 @@ async function dbpostProduct ( newProduct) {
     return await ProductModel.create(newProduct)
 }
 
+async function dbGetProductsPage ( page, pageSize, filter) {
+    return await ProductModel.find(filter)
+        .skip(( page - 1 ) * pageSize)
+        .limit(pageSize)
+        .sort({createAt: -1 })
+}
+
 async function dbgetProduct () {
     return await ProductModel.find({})
 }
@@ -25,6 +32,7 @@ async function dbputProductById(id, updateProduct) {
 }
 
 module.exports = {
+    dbGetProductsPage,
     dbpostProduct,
     dbpatchProductById,
     dbputProductById,

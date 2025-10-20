@@ -1,6 +1,6 @@
 const { handleResponseSucess, handleResponseError } = require("../helpers/handleResponse.js")
 const {ProductModel}  = require("../models/product.model")
-const { dbpostProduct, dbputProductById, dbgetProduct, dbgetProductsById, dbpatchProductById, dbdeleteProductsById } = require("../services/products.service")
+const { dbpostProduct, dbGetProductsPage, dbputProductById, dbgetProduct, dbgetProductsById, dbpatchProductById, dbdeleteProductsById } = require("../services/products.service")
 
 async function getProducts (req, res) {
     try {
@@ -9,6 +9,25 @@ async function getProducts (req, res) {
     }
     catch ( error ) {
         handleResponseError( res, 500, 'Error al obetener el producto', error)
+    }
+}
+
+async function getProductsPage(req, res) {
+    const
+        category = req.params.category
+        page = parseInt(req.params.page) || 1
+        pageSize = parseInt(req.params.pageSize) || 10
+
+    const filter = {}
+    if ( category !== 'all') {
+        filter.category = category
+    }
+    try {
+        const data = await dbGetProductsPage( page, pageSize, filter);
+        console.log( page, pageSize, data);
+        handleResponseSucess(res, 200, {page, pageSize, data})
+    } catch (error) {
+        handleResponseError(res, 500, 'Error al obtener los productos', error)
     }
 }
 
@@ -99,6 +118,7 @@ async function patchProductById (req, res) {
 }
 
 module.exports = {
+    getProductsPage,
     getProducts,
     postProduct,
     putProductById,
